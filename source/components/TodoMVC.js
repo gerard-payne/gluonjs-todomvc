@@ -84,6 +84,7 @@ class TodoMVC extends GluonElement {
                 on-keypress=${(eEvent) => {
                     if(eEvent.keyCode === 13) {
                         _list.addItem(this.$.newTodo.value);
+                        this.$.newTodo.value = ""; // otherwise blur event duplicates todo
                         render(this.template, this.parentElement);
                     }
                 }}
@@ -108,7 +109,7 @@ class TodoMVC extends GluonElement {
                                     type="checkbox"
                                     checked="${item.completed}"
                                     on-click=${() => {
-                                        item.toggleDone();
+                                        item.toggleComplete();
                                         _list.save();
                                         render(this.template, this.parentElement);
                                     }}
